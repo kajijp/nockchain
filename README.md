@@ -1,59 +1,64 @@
 # Nockchain
 
-**Nockchain is a lightweight blockchain for heavyweight verifiable applications.**
+**Nockchain adalah blockchain ringan yang dirancang untuk aplikasi berat yang membutuhkan verifikasi tinggi.**
+
+Kami percaya bahwa masa depan blockchain ada di sistem yang ringan namun dapat menyelesaikan komputasi kompleks secara terverifikasi. Cara mencapainya bukan dengan menyalin data ke semua node publik, tapi dengan pembuktian privat off-chain yang kemudian diverifikasi secara on-chain.
+
+*⚠️ Catatan: Nockchain masih bersifat eksperimental dan belum diaudit sepenuhnya. Gunakan dengan risiko Anda sendiri.*
 
 
-We believe the future of blockchains is lightweight trustless settlement of heavyweight verifiable computation. The only way to get there is by replacing verifiability-via-public-replication with verifiability-via-private-proving. Proving happens off-chain; verification is on-chain.
+## 🔧 Persiapan Awal (Setup)
 
-*Nockchain is entirely experimental and many parts are unaudited. We make no representations or guarantees as to the behavior of this software.*
+Nockchain dibangun dengan Rust. Kamu perlu menginstal rustup terlebih dahulu: [https://rustup.rs/](https://rustup.rs/)
+<br>Ikuti petunjuk di halaman tersebut sesuai sistem operasi kamu (Windows, macOS, Linux).
 
-
-## Setup
-
-Install `rustup` by following their instructions at: [https://rustup.rs/](https://rustup.rs/)
-
-Install `hoonc`, the Hoon compiler:
+## Instal Kompiler Hoon (hoonc)
+Setelah Rust terinstal, jalankan perintah berikut untuk menginstal hoonc:
 
 ```
 make install-hoonc
 ```
 
-To build the Nockchain and the wallet binaries and their required assets:
-
+## Bangun Proyek Nockchain dan Wallet
+Setelah hoonc terinstal, bangun semua file biner (termasuk dompet/wallet dan aset-aset yang dibutuhkan):
 ```
 make build
 ```
 
-## Install Wallet
+## 💰 Instalasi Dompet (Wallet)
 
-After you've run the setup and build commands, install the wallet:
+Setelah kamu menyelesaikan langkah build di atas, jalankan perintah berikut untuk menginstal dompet Nockchain:
 
 ```
 make install-nockchain-wallet
 ```
+Untuk menjalankan dompet, buka file README yang ada di direktori wallet:
+```
+nano ./crates/nockchain-wallet/README.md
+```
 
-To run the wallet, see the nockchain-wallet [README](./crates/nockchain-wallet/README.md).
+## ⛓ Instalasi Nockchain (Node Blockchain)
 
-
-## Install Nockchain
-
-After you've run the setup and build commands, install the wallet:
+Setelah proses build, kamu juga bisa menginstal node Nockchain dengan perintah berikut:
 
 ```
 make install-nockchain
 ```
 
 
-## Testing Nodes
+## 🧪 Menjalankan Node Uji Coba
 
-To run a test Nockchain node that publishes the genesis block:
+Kamu bisa menjalankan dua jenis node uji coba untuk melihat bagaimana Nockchain bekerja.<br>
+
+### 🔹 Node Leader (Pemimpin)<br>
+Node ini akan membuat genesis block (blok pertama dalam blockchain):<br>
 
 ```
 make run-nockchain-leader
 ```
 
-
-To run a test Nockchain node that waits for the genesis block:
+### 🔸 Node Follower (Pengikut)
+Node ini akan menunggu sampai genesis block diterbitkan oleh leader:
 
 ```
 make run-nockchain-follower
