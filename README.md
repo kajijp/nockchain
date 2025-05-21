@@ -39,27 +39,23 @@ Dashboard komunitas ini, [**NockStats**](https://nockstats.com/), memiliki fitur
 * Semakin banyak penambang = Hashrate meningkat = Tingkat kesulitan bertambah
 
 ### Metode 1: Solo (CLI):
-Kamu menjalankan Node Penambang berbasis CPU secara lokal. Ini memerlukan perangkat keras yang cukup kuat
+* Kamu menjalankan Node Penambang berbasis CPU secara lokal. Ini memerlukan perangkat keras yang cukup kuat
+* Ikuti panduan [CLI Setup](https://github.com/kajijp/nockchain/blob/master/README.md#cli-miner-setup)
 
-Ikuti panduan [CLI Setup](
+### Metode 2: Pool & Metode 3: GUI
+* Kamu bisa bergabung dengan mining pool, berbagi kekuatan komputasi dan mendapatkan reward bersama
+* Metode resmi yang dirilis tim hanya versi CLI, belum ada GUI atau Pool resmi
+* Namun, proyek dan pool berbasis komunitas mulai bermunculan
+* **GUI Setup (Aplikasi)**: Ada proyek baru bernama [**Nockpool**](https://swps.io/nockpool) yang sedang mengembangkan GUI berbasis Windows agar mudah menambang $NOCK
 
-### Method 1: Solo (CLI):
-* You run a solo CPU-based Miner Node on your system which will certainly need a powerful hardware.
-* You can follow [CLI Setup](https://github.com/0xmoei/nockchain/blob/main/README.md#cli-miner-setup) steps.
-
-### Method 2: Pool & Method 3: GUI
-* You join a pool (same as bitcoin mining), share your computational power and earn rewards in a shared pool of rewards.
-* Official mining method is CLI introduced by the team, and no official Pool or GUI mining programs introduced.
-* But new community-driven *Projects* and *Pools* are poping up.
-* **GUI Setup (App)**: There's a new project called [**Nockpool**](https://swps.io/nockpool), I think they are building a GUI-based Node so you can easily open a wallet on Windows, join a pool, and Mine $NOCK.
 
 ![image](https://github.com/user-attachments/assets/6f58647d-2255-4ebb-839c-eeb539cac258)
 
 ---
 
 # CLI Miner Setup
-## Hardware Requirements
-Hardware requirement is highly speculative since no one knows how Mainnet-launch goes.
+## Spesifikasi Hardware
+Spesifikasi perangkat keras masih bersifat spekulatif karena belum ada acuan pasti hingga Mainnet aktif.
 
 <table>
   <tr>
@@ -77,31 +73,27 @@ Hardware requirement is highly speculative since no one knows how Mainnet-launch
   </tr>
 </table>
 
-* more CPU = more hashrate = more chances
-* We still can't say that's enough, because it's just a testnet environment and we need to wait until mainnet.
-
+* Semakin besar CPU = Semakin tinggi hashrate = Semakin besar peluang
+* Masih belum bisa dipastikan apakah ini cukup, karena ini masih testnet.
 ---
 
-## OS Requirements
+## Persyaratan OS
 
-* **Windows Users:** Install Linux Ubuntu on your Windows using this [Guide](https://github.com/0xmoei/Install-Linux-on-Windows)
-* **VPS:** Recommended crypto-payment VPS provider to [Purchase](https://my.hostbrr.com/order/forms/a/NTMxNw==) or Visit [VPS Beginner Guide](https://github.com/0xmoei/Linux_Node_Guide/)
+* **Pengguna Windows:** Instal Ubuntu di Windows menggunakan panduan ini: [Install Linux on Windows](https://github.com/0xmoei/Install-Linux-on-Windows)
+* **VPS:** Gunakan penyedia VPS andalan kalian
 
-> Note: Miners are initially CPU-based for users and will eventually move to GPU and ASIC.
->
-> Zorp as a for-profit labs company behind Nockchain will be selling private, closed-source software to mining partners, possibly even GPU-based to help bootstrap the initial security and proofrate of the network.
->
-> Meaning they will likely dominate block rewards over the vast majority of people, but yet the protocol might potentially be rewarding for early users.
-
+> Catatan: Awalnya penambangan dilakukan menggunakan CPU, tetapi nanti akan beralih ke GPU dan ASIC
+Zorp (perusahaan di balik Nockchain) akan menjual perangkat lunak penambangan tertutup ke mitra GPU, sehingga mereka kemungkinan mendominasi reward.
+> 
 ---
 
 ## CLI Installation Steps
-### Step 1: Install Dependecies
-* Update Packages
+### Langkah 1: Install Dependecies
+* Perbarui Paket
 ```bash
 sudo apt-get update && sudo apt-get upgrade -y
 ```
-* Install Packages:
+* Install Paket:
 ```bash
 sudo apt install curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev  -y
 ```
@@ -113,7 +105,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
 ```
 
-* Docker (For Mainnet, we might choose Docker setup)
+* Docker (Untuk Mainnet, Instal Docker (untuk Mainnet nanti))
 ```bash
 sudo apt update -y && sudo apt upgrade -y
 for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
@@ -140,33 +132,32 @@ sudo systemctl enable docker
 sudo systemctl restart docker
 ```
 
-### Step 2: Clone NockChain Repo
+### Langkah 2: Salin NockChain Repositori
 ```bash
 git clone https://github.com/zorp-corp/nockchain
 
 cd nockchain
 ```
 
-### Step 3: Install Choo (Jock/Hoon Compiler)
+### Langkah 3: Install Choo (Jock/Hoon Compiler)
 ```bash
 make install-hoonc
 ```
-* This compiles `hoonc`, the Nock-based compiler used for running Jock programs and ZKVM applications.
-  
-### Step 4: Build
-Building may take more than 15 minutes.
+
+### Langkah 4: Build
+Build biasanya memakan waktu sekitar 15 menit.
 ```bash
-# Install node binaries
+# Install binary node
 make build
 
-# Install wallet binaries
+# Install binary wallet
 make install-nockchain-wallet
 
 # Install Nockchain
 make install-nockchain
 ````
 
-## Step 5: Setup Wallet
+## Langkah 5: Setting Wallet
 Make sure you are in `nockchain` directory.
 * Set PATH:
 ```bash
@@ -176,20 +167,21 @@ export PATH="$PATH:$(pwd)/target/release"
 ```bash
 nockchain-wallet keygen
 ```
-* Save `memo`, `private key` & `public key` of your wallet.
-> Note: After every terminal restart, Ensure you execute these two commands before executing wallet commands again: `cd nockchain` & `export PATH="$PATH:$(pwd)/target/release"`.  By doing this, you won't get Error: `wallet: command not found`.
 
-## Step 6: Configure Nodes
-Your Node's configuration is in `Makefile`
-Open `Makefile`:
+* Simpan memo, private key, dan public key.
+> Setelah restart terminal: jalankan kembali cd nockchain dan export PATH=... agar perintah wallet bisa dijalankan..
+
+## Langkah 6: Konfigurasi Node
+Konfigurasi node kalian berada di `Makefile`
+Buka `Makefile`:
 ```bash
 nano Makefile
 ```
-* `MINING_PUBKEY`: Replace your wallet `public key` with its value.
-* `Ports`: By default, Nodes use ports `3005` and `3006`. If these ports are occupied on your system, modify them in the node configuration.
-* To save: `Ctrl+X` + `Y` + `Enter`
+* `MINING_PUBKEY` : Ganti `MINING_PUBKEY` dengan `public key` dari wallet kamu.
+* `Ports`: Jika port 3005 & 3006 sudah digunakan, ubah ke port lain
+* Tekan `Ctrl+X` + `Y` + `Enter` untuk menyimpan
 
-### Step 7: Open ports
+### Langkah 7: Membuka ports
 ```console
 # Allow ssh port
 sudo ufw allow ssh
@@ -203,26 +195,26 @@ sudo ufw allow 3005/tcp
 sudo ufw allow 3006/tcp
 ```
 
-### Step 8: Run Leader Node
-Leader Node is a fake testnet node. On mainnet Peer IDs will be replaced with Leader node, we only need to run Follower Node in the next step.
-* Open a screen:
+### Langkah 8: Menjalan Leader Node
+Leader Node adalah node testnet palsu. Pada mainnet nanti, Peer ID akan digantikan dengan Leader node, sehingga kita hanya perlu menjalankan Follower Node di langkah selanjutnya.
+* Membuka screen:
 ```bash
 screen -S leader
 ```
-* Start a **Leader Node** (Testnet Node for fake genesis block):
+* Memulai **Leader Node** (Testnet Node untuk genesis block palsu):
 ```bash
 make run-nockchain-leader
 ```
-* Wait for it to install.
-* To minimize:  `Ctrl` + `A` + `D`
+* Tunggu proses instalasinya.
+* Untuk mengecilkan screen(keluar tanpa stop):  `Ctrl` + `A` + `D`
 
-### Step 9: Run Follower Node:
-* Open a screen
+### Langkah 9: Menjalankan Follower Node:
+* Membuka screen:
 ```bash
 screen -S follower
 ```
 
-* Start a **Follower Node** (Miner Node for connecting to other peers):
+* Memulai **Follower Node** (Miner Node untuk menghubungkan dengan peer lain):
 ```bash
 make run-nockchain-follower
 ```
@@ -233,131 +225,54 @@ I (12:18:32) nc: block by-height: [Ok(%heavy-n) Ok(1) 0]
 ```
 * To minimize:  `Ctrl` + `A` + `D`
 
-## Usefull commands
+## Commands Berguna
 ### Wallet commands:
-> Note: After every terminal restart, Ensure you execute these two commands before executing wallet commands again: `cd nockchain` & `export PATH="$PATH:$(pwd)/target/release"`.  By doing this, you won't get Error: `wallet: command not found`.
 
-General Wallet Command:
+> Catatan: Setelah setiap kali terminal direstart, pastikan untuk menjalankan dua perintah ini sebelum menjalankan perintah wallet kembali: `cd nockchain` & `export PATH="$PATH:$(pwd)/target/release"`. Dengan melakukan ini, kamu tidak akan mendapatkan error: `wallet: command not found`.
+
+Perintah Wallet Umum:
 ```bash
 nockchain-wallet --nockchain-socket ./test-leader/nockchain.sock
 ```
-Wallet Balance:
+Cek Saldo Wallet:
 ```bash
 nockchain-wallet --nockchain-socket ./test-leader/nockchain.sock balance
 ```
-* It looks good. `~` is like a 0 and balance will be 0 until you mine a block.
+* Tampilan saldo akan terlihat seperti ~ yang artinya 0. Saldo akan tetap 0 sampai kamu berhasil menambang satu blok.
 
 ![image](https://github.com/user-attachments/assets/52550e55-21b2-4625-84f9-3250eca367f5)
 
-* [Official repo](https://github.com/zorp-corp/nockchain/blob/master/crates/wallet/README.md) for more Wallet commands.
+* [Repositori Resmi](https://github.com/zorp-corp/nockchain/blob/master/crates/wallet/README.md) untuk lebih banyak perintah Wallet.
 
-### Screen commands:
-Ensure screens do not overlap. Before opening or switching to another screen, minimize or close the current screen.
+### Perintah Screen:
+Pastikan tidak ada screen yang tumpang tindih. Sebelum membuka atau berpindah ke screen lain, minimalkan atau tutup screen yang sedang aktif terlebih dahulu.
 ```console
-# Return leader screen (leader logs)
+# Kembali ke leader screen (leader logs)
 screen -r leader
 
-# Return leader screen (follower logs)
+# Kembali ke leader screen (follower logs)
 screen -r follower
 
-# Minimize screen
+# Mengecilkan screen
 Press: CTRL + A + D
 
-# Screens list
+# Daftar Screens
 screen -ls
 
-# Stop Node when inside a screen
-Press: Ctrl + C
+# Menghentikan node didalam screen
+Tekan: Ctrl + C
 
-# Kill and Remove screen when outside a screen (replace NAME)
-screen -XS NAME quit
+# Hapus dan tutup screen saat berada di luar screen (ganti NAME dengan nama screen)
+screen -XS NAMA quit
 ```
 
 ---
 
-Well, We just tested a Nockchain Miner node on the testnet, which is *NOT incentivized*. This was an experiment to prepare for the Mainnet launch on **May 19**. The team might update the docs with new features, and the Mainnet setup may ir may not differ.
+Kita baru saja menguji node Miner Nockchain pada testnet, yang *TIDAK memberikan insentif*. Ini adalah percobaan untuk persiapan peluncuran Mainnet pada **19 Mei**. Tim pengembang kemungkinan akan memperbarui dokumentasi dengan fitur-fitur baru, dan setup pada Mainnet bisa saja berbeda atau sama dengan testnet.
 
 ---
 
 
-# Nockchain
-
-**Nockchain adalah blockchain ringan yang dirancang untuk aplikasi berat yang membutuhkan verifikasi tinggi.**
-
-Kami percaya bahwa masa depan blockchain ada di sistem yang ringan namun dapat menyelesaikan komputasi kompleks secara terverifikasi. Cara mencapainya bukan dengan menyalin data ke semua node publik, tapi dengan pembuktian privat off-chain yang kemudian diverifikasi secara on-chain.
-
-*⚠️ Catatan: Nockchain masih bersifat eksperimental dan belum diaudit sepenuhnya. Gunakan dengan risiko Anda sendiri.*
-
-
-## 🔧 Persiapan Awal (Install Paket)
-```
-sudo apt update && sudo apt install curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev  -y
-```
-
-## Install RUST
-Nockchain dibangun dengan Rust. Kamu perlu menginstal rustup terlebih dahulu: [Tutorial install Rust di Linux & WSL](https://github.com/kajijp/Install-RUST-di-WSL-dan-Linux)
-<br>Ikuti petunjuk di halaman tersebut sesuai sistem operasi kamu (Windows, macOS, Linux).
-```
-curl https://sh.rustup.rs -sSf | sh
-```
-```
-source $HOME/.cargo/env
-```
-## Salin Repositori zorp-corp
-```
-git clone https://github.com/zorp-corp/nockchain && cd nockchain
-```
-## Instal Kompiler Hoon (hoonc)
-Setelah Rust terinstal, jalankan perintah berikut untuk menginstal hoonc:
-
-```
-make install-hoonc
-```
-
-## Bangun Proyek Nockchain dan Wallet
-Setelah hoonc terinstal, bangun semua file biner (termasuk dompet/wallet dan aset-aset yang dibutuhkan):
-```
-make build
-```
-
-## 💰 Instalasi Dompet (Wallet)
-
-Setelah kamu menyelesaikan langkah build di atas, jalankan perintah berikut untuk menginstal dompet Nockchain:
-
-```
-make install-nockchain-wallet
-```
-Untuk menjalankan dompet, buka file README yang ada di direktori wallet:
-```
-nano ./crates/nockchain-wallet/README.md
-```
-
-## ⛓ Instalasi Nockchain (Node Blockchain)
-
-Setelah proses build, kamu juga bisa menginstal node Nockchain dengan perintah berikut:
-
-```
-make install-nockchain
-```
-
-
-## 🧪 Menjalankan Node Uji Coba
-
-Kamu bisa menjalankan dua jenis node uji coba untuk melihat bagaimana Nockchain bekerja.<br>
-
-### 🔹 Node Leader (Pemimpin)<br>
-Node ini akan membuat genesis block (blok pertama dalam blockchain):<br>
-
-```
-make run-nockchain-leader
-```
-
-### 🔸 Node Follower (Pengikut)
-Node ini akan menunggu sampai genesis block diterbitkan oleh leader:
-
-```
-make run-nockchain-follower
-```
 
 <br><br><br>
 🔥 Mohon dukungan agar KajiJP semakin berkembang, like dan gabung ke channel kami, sebarkan dan undang teman anda, terima kasih, Insyaallah JP!
