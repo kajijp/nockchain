@@ -9,7 +9,7 @@ Kami percaya bahwa masa depan blockchain ada di sistem yang ringan namun dapat m
 
 ## 🔧 Persiapan Awal (Setup)
 
-Nockchain dibangun dengan Rust. Kamu perlu menginstal rustup terlebih dahulu: [https://rustup.rs/](https://rustup.rs/)
+Nockchain dibangun dengan Rust. Kamu perlu menginstal rustup terlebih dahulu: [Tutorial install Rust di Linux & WSL](https://github.com/kajijp/Install-RUST-di-WSL-dan-Linux)
 <br>Ikuti petunjuk di halaman tersebut sesuai sistem operasi kamu (Windows, macOS, Linux).
 
 ## Salin Repositori zorp-corp
